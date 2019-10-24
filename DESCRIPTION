@@ -1,0 +1,35 @@
+Package: PCMBayes
+Type: Package
+Title: Bayesian inference for multivariate Phylogenetic Comparative Models
+Version: 0.1.0
+Author: c(person("Venelin", "Mitov", email = "vmitov@gmail.com",
+                    role = c("aut", "cre", "cph")))
+Maintainer: Venelin Mitov <vmitov@gmail.com>
+Description: Phylogenetic comparative methods represent models of continuous trait 
+  data associated with the tips of a phylogenetic tree. Examples of such models 
+  are Gaussian continuous time branching stochastic processes such as Brownian 
+  motion (BM) and Ornstein-Uhlenbeck (OU) processes, which regard the data at the 
+  tips of the tree as an observed (final) state of a Markov process starting from 
+  an initial state at the root and evolving along the branches of the tree. 
+  PCMBayes provides reversible jump MCMC samplers for mixed Gaussian phylogenetic
+  models. 
+Encoding: UTF-8
+License: GPL (>= 3.0)
+LazyData: true
+Depends: 
+  R (>= 3.1.0)
+Imports: 
+  PCMBase, 
+  data.table
+Suggests: 
+  testthat, 
+  knitr, 
+  rmarkdown, 
+  PCMBaseCpp
+RoxygenNote: 6.1.1
+ByteCompile: yes
+VignetteBuilder: knitr, rmarkdown
+URL: https://venelin.github.io/PCMBayes/, https://github.com/venelin/PCMBayes
+BugReports: https://github.com/venelin/PCMBayes/issues
+NeedsCompilation: no
+Repository: CRAN

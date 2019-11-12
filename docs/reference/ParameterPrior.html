@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">PCMBayes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -115,13 +115,65 @@
 
     <pre class="usage"><span class='fu'>ParameterPrior</span>(<span class='kw'>enclos</span> <span class='kw'>=</span> <span class='st'>"?"</span>, <span class='kw'>pos</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>r</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>p</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>p.d</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>p.r</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
-        
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>enclos</th>
+      <td><p>a character string containing the special symbol '?'. This
+symbol is to be replaced by expressions denoting objects to which this
+ParameterPrior object will be added. The result of this
+substitution can be anything but, usually would be a valid R expression.
+Default: "?". See also <code><a href='AddPrior.html'>AddPrior</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>pos</th>
+      <td><p>an integer denoting an offset position in a parameter vector.
+Default: <code>NULL</code>.</p></td>
+    </tr>
+    <tr>
+      <th>d, r</th>
+      <td><p>character strings denoting the names of a density function and of
+a random generator function for some distribution, e.g. "dunif" and "runif".</p></td>
+    </tr>
+    <tr>
+      <th>p</th>
+      <td><p>a list with 'static' arguments common for <code>d</code> and <code>r</code>.
+By 'static', it is meant arguments that do not change during a sampling
+procedure, e.g. the rate of an exponentional prior or the boundaries of a
+uniform prior.</p></td>
+    </tr>
+    <tr>
+      <th>p.d</th>
+      <td><p>a list of static arguments to be passed specifically to
+<code>d</code> (added to <code>p</code>).</p></td>
+    </tr>
+    <tr>
+      <th>p.r</th>
+      <td><p>a list of static arguments to be passed specifically to
+<code>r</code> (added to <code>p</code>).</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>additional arguments to be stored as member elements in the
+returned ParameterPrior object.</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>an object of S3 class <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("ParameterPrior", "Prior")</a></code>.</p>
+    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-                </ul>
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
 
   </div>
 </div>

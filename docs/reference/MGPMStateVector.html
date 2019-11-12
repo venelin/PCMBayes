@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Check if an object is a ParameterPrior object. — is.ParameterPrior • PCMBayes</title>
+<title>Construct an MGPM state vector. — MGPMStateVector • PCMBayes</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Check if an object is a ParameterPrior object. — is.ParameterPrior" />
+<meta property="og:title" content="Construct an MGPM state vector. — MGPMStateVector" />
 
-<meta property="og:description" content="Check if an object is a ParameterPrior object." />
+<meta property="og:description" content="Construct an MGPM state vector." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -102,32 +102,97 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Check if an object is a ParameterPrior object.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/venelin/PCMBayes/blob/master/R/PCMPrior.R'><code>R/PCMPrior.R</code></a></small>
-    <div class="hidden name"><code>is.ParameterPrior.Rd</code></div>
+    <h1>Construct an MGPM state vector.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/venelin/PCMBayes/blob/master/R/MGPMState.R'><code>R/MGPMState.R</code></a></small>
+    <div class="hidden name"><code>MGPMStateVector.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Check if an object is a ParameterPrior object.</p>
+    <p>Construct an MGPM state vector.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>is.ParameterPrior</span>(<span class='no'>o</span>)</pre>
+    <pre class="usage"><span class='fu'>MGPMStateVector</span>(<span class='no'>K</span>, <span class='no'>n</span>, <span class='no'>l</span>, <span class='no'>r</span>, <span class='no'>m</span>, <span class='no'>v</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>o</th>
-      <td><p>an R object.</p></td>
+      <th>K</th>
+      <td><p>an integer (see Details).</p></td>
+    </tr>
+    <tr>
+      <th>n</th>
+      <td><p>an integer vector of length <code>K</code> denoting shift nodes (see Details).</p></td>
+    </tr>
+    <tr>
+      <th>l</th>
+      <td><p>a real vector of length <code>K</code> (see Details).</p></td>
+    </tr>
+    <tr>
+      <th>r</th>
+      <td><p>an integer vector of length <code>K</code> (see Details).</p></td>
+    </tr>
+    <tr>
+      <th>m</th>
+      <td><p>an integer vector of length <code>R</code>, where <code>R</code> denotes the
+total number of regimes (see Details).</p></td>
+    </tr>
+    <tr>
+      <th>v</th>
+      <td><p>a real vector of length <code>P</code>, where <code>P</code> denotes the total
+number of numeric parameters of the MGPM model represented by the state
+(see Details).</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a logical indicating whether the S3 class of <code>o</code> inherits from
-<code>'ParameterPrior'</code>.</p>
+    <p>a numerical vector representing the concatenation of
+<code>K, n, l, r, m, v</code>, with S3 class set to 'MGPMStateVector'.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The MGPMState of an MCMC is represented by a numerical vector of the form:
+$$\vec{s}=(K, n_2,...,n_K, l_2,...,l_{K+1}, r_2,...,r_{K+1}, m_1,...,m_R, v_1,...,v_P)^T$$
+The element of this vector are described as follows:</p><dl class='dl-horizontal'>
+<dt>\(K\): </dt><dd><p>number of shifts;</p></dd>
+<dt>\((n_2,...,n_{K+1})^T\): </dt><dd><p>shift nodes - the shifts in the model occur
+at points within the branches leading to the shift nodes in tip-ward
+direction. The corresponding locations of these points are specified by
+\((l_2,...,l_{K+1})^T\). The nodes \((n_2,...,n_{K+1})^T\) should be ordered
+according to <code>PCMTreePreorder(ctx$tree)</code>.</p></dd>
+<dt>\((l_2,...,l_{K+1})^T\): </dt><dd><p>offset of the shift points measured as
+distances from the beginnings of the branches leading to shift nodes in
+tip-ward direction.</p></dd>
+<dt>\((r_2,...,r_{K+1})^T\): </dt><dd><p>regime index vector. This is an integer
+vector with elements among \((N+1,n_2,...,n_{K+1})^T\), indicating the regime
+associated with each part in the tree. The regimes are named as the shift
+nodes, with N+1 corresponding to the part (and regime) originating at the
+root. It is possible to have lumped regimes, that is, different parts having
+the same regime. This regime-lumping must obey the following rules:
+<ol>
+<li><p>neighbor parts cannot have a lumped regime. Two parts originating at
+nodes \(n_i\) and \(n_j\) in the tree are called neighbor parts if they
+are separated solely by \(n_i\) or by \(n_j\);</p></li>
+<li><p>to resolve the conflict between the shift nodes of the different parts
+covered by a lumped regime, it is established that the name of a lumped
+regime must equal the shift-node that appears first, according to
+<code>PCMTreePreorder(ctx$tree)</code>.</p></li>
+</ol></p></dd>
+<dt>\((m_1,...,m_R)^T\): </dt><dd><p>model type assignment to the unique regimes.
+This is an integer vector with elements between 1 and M, M denoting the
+total number of model types possible. Each element corresponds to an
+element in <code>unique(c(N+1,r_2,...,r_{K+1}))</code></p></dd>
+<dt>\((v_1,...,v_P)^T\): </dt><dd><p>real numbers passed to
+<code>PCMParamLoadOrStore</code>. This is a vectorized form of all model
+parameters.</p></dd>
+</dl>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='MGPMState.html'>MGPMState</a></code></p></div>
     
 
   </div>
@@ -137,6 +202,10 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

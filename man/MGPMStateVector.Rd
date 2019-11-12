@@ -34,17 +34,17 @@ The MGPMState of an MCMC is represented by a numerical vector of the form:
 \deqn{\vec{s}=(K, n_2,...,n_K, l_2,...,l_{K+1}, r_2,...,r_{K+1}, m_1,...,m_R, v_1,...,v_P)^T}
 The element of this vector are described as follows:
 \describe{
-\item{K: }{number of shifts;}
-\item{\eqn{(n_2,...,n_{K+1}): }}{shift nodes - the shifts in the model occur
+\item{\eqn{K}: }{number of shifts;}
+\item{\eqn{(n_2,...,n_{K+1})^T}: }{shift nodes - the shifts in the model occur
 at points within the branches leading to the shift nodes in tip-ward
 direction. The corresponding locations of these points are specified by
-\eqn{(l_2,...,l_{K+1})}. The nodes \eqn{(n_2,...,n_{K+1})} should be ordered
+\eqn{(l_2,...,l_{K+1})^T}. The nodes \eqn{(n_2,...,n_{K+1})^T} should be ordered
 according to \code{\link{PCMTreePreorder}(ctx$tree)}.}
-\item{\eqn{(l_2,...,l_{K+1}): }}{offset of the shift points measured as
+\item{\eqn{(l_2,...,l_{K+1})^T}: }{offset of the shift points measured as
 distances from the beginnings of the branches leading to shift nodes in
 tip-ward direction.}
-\item{\eqn{(r_2,...,r_{K+1}): }}{regime index vector. This is an integer
-vector with elements among \eqn{(N+1,n_2,...,n_{K+1})}, indicating the regime
+\item{\eqn{(r_2,...,r_{K+1})^T}: }{regime index vector. This is an integer
+vector with elements among \eqn{(N+1,n_2,...,n_{K+1})^T}, indicating the regime
 associated with each part in the tree. The regimes are named as the shift
 nodes, with N+1 corresponding to the part (and regime) originating at the
 root. It is possible to have lumped regimes, that is, different parts having
@@ -58,11 +58,11 @@ covered by a lumped regime, it is established that the name of a lumped
 regime must equal the shift-node that appears first, according to
 \code{\link{PCMTreePreorder}(ctx$tree)}.
 }}
-\item{\eqn{(m_1,...,m_R): }}{model type assignment to the unique regimes.
+\item{\eqn{(m_1,...,m_R)^T}: }{model type assignment to the unique regimes.
 This is an integer vector with elements between 1 and M, M denoting the
 total number of model types possible. Each element corresponds to an
 element in \code{unique(c(N+1,r_2,...,r_{K+1}))}}
-\item{\eqn{(v_1,...,v_P):} }{real numbers passed to
+\item{\eqn{(v_1,...,v_P)^T}: }{real numbers passed to
 \code{\link{PCMParamLoadOrStore}}. This is a vectorized form of all model
 parameters.}
 }

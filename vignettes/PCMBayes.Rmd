@@ -1,0 +1,62 @@
+---
+title: "Getting started with the PCMBayes R-package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting started with the PCMBayes R-package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+if(!requireNamespace("ggtree")) {
+  message("Building the vignette requires ggtree R-package. Trying to install.")
+  status.ggtree <- try({
+    if (!requireNamespace("BiocManager", quietly = TRUE))
+      install.packages("BiocManager")
+    BiocManager::install("ggtree", version = "3.9")
+  }, silent = TRUE)
+  if(class(status.ggtree == "try-error")) {
+    stop(
+      "The ggtree installation did not succeed. The vignette cannot be built.")
+  }
+}
+```
+
+```{r, message=FALSE, fig.width=7, fig.height=5.6}
+# We use the PCMBase package to do basic manipulation with trees and models. 
+# See https://venelin.github.io/PCMBase for an introduction into this package.
+library(PCMBase)
+library(PCMBayes)
+library(ggtree)
+
+# The PCMBase package comes with a collection of simulated objects, which we 
+# can use as example.
+
+tree <- PCMBaseTestObjects$tree.ab
+model <- PCMExtractDimensions(PCMBaseTestObjects$model_MixedGaussian_ab, dims = 1:2)
+X <- PCMBaseTestObjects$traits.ab.123[1:2, ]
+
+# Plot the tree and the data
+plTree <- PCMTreePlot(tree) + 
+  geom_tiplab(size = 3) + geom_nodelab(nudge_x = .02, nudge_y = 2, size = 2) + 
+  theme_tree2()
+plData <- PCMPlotTraitData2D(
+  X[, seq_len(PCMTreeNumTips(tree))], 
+  labeledTips = seq_len(PCMTreeNumTips(tree)), 
+  sizeLabels = 3,
+  sizePoints = 1,
+  nudgeLabels = c(0.4, 0.4),
+  tree, numTimeFacets = 3, scaleSizeWithTime = FALSE)
+
+cowplot::plot_grid(plTree, plData, nrow = 2)
+```
+
+```{r}
+
+#ctx <- MGPMContext(X, tree)
+```

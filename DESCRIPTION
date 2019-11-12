@@ -1,7 +1,7 @@
 Package: PCMBayes
 Type: Package
 Title: Bayesian inference for multivariate Phylogenetic Comparative Models
-Version: 0.1.0
+Version: 0.1.1
 Author: c(person("Venelin", "Mitov", email = "vmitov@gmail.com",
                     role = c("aut", "cre", "cph")))
 Maintainer: Venelin Mitov <vmitov@gmail.com>
@@ -25,7 +25,10 @@ Suggests:
   testthat, 
   knitr, 
   rmarkdown, 
-  PCMBaseCpp
+  PCMBaseCpp,
+  cowplot,
+  ggtree,
+  BiocManager
 RoxygenNote: 6.1.1
 ByteCompile: yes
 VignetteBuilder: knitr, rmarkdown

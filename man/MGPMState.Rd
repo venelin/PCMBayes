@@ -2,14 +2,14 @@
 % Please edit documentation in R/MGPMState.R
 \name{MGPMState}
 \alias{MGPMState}
-\title{(Re-)construct an MGPMState object from a state vector}
+\title{Construct a MGPMState object from a state vector}
 \usage{
 MGPMState(s, ctx)
 }
 \arguments{
-\item{s}{a numerical vector representing an MGPM state. Some of the entries
-in this vector are interpreted as integers denoting nodes in a tree,
-regimes or model types (see Details).}
+\item{s}{a numerical vector representing a MGPM state. Some of the
+entries in this vector are interpreted as integers denoting nodes in a
+tree, regimes or model types (see \code{\link{MGPMStateVector}}).}
 
 \item{ctx}{a MGPMContext object.}
 }
@@ -17,7 +17,7 @@ regimes or model types (see Details).}
 a MGPMState object.
 }
 \description{
-(Re-)construct an MGPMState object from a state vector
+Construct a MGPMState object from a state vector
 }
 \seealso{
 \code{\link{MGPMStateVector}}

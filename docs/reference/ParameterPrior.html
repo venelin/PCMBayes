@@ -103,7 +103,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Create a ParameterPrior object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/venelin/PCMBayes/blob/master/R/PCMPrior.R'><code>R/PCMPrior.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/venelin/PCMBayes/blob/master/R/ParameterPrior.R'><code>R/ParameterPrior.R</code></a></small>
     <div class="hidden name"><code>ParameterPrior.Rd</code></div>
     </div>
 
@@ -113,46 +113,36 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>ParameterPrior</span>(<span class='kw'>enclos</span> <span class='kw'>=</span> <span class='st'>"?"</span>, <span class='kw'>pos</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>r</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>p</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>p.d</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>p.r</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>ParameterPrior</span>(<span class='kw'>d</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>r</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>p</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>p.d</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>p.r</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>enclos</th>
-      <td><p>a character string containing the special symbol '?'. This
-symbol is to be replaced by expressions denoting objects to which this
-ParameterPrior object will be added. The result of this
-substitution can be anything but, usually would be a valid R expression.
-Default: "?". See also <code><a href='AddPrior.html'>AddPrior</a></code>.</p></td>
-    </tr>
-    <tr>
-      <th>pos</th>
-      <td><p>an integer denoting an offset position in a parameter vector.
-Default: <code>NULL</code>.</p></td>
-    </tr>
-    <tr>
       <th>d, r</th>
       <td><p>character strings denoting the names of a density function and of
-a random generator function for some distribution, e.g. "dunif" and "runif".</p></td>
+a random generator function for some distribution, e.g. "dunif" and "runif".
+Alternatively, these can be function objects, but this is not recommended,
+because it can result in multiple duplication of these objects in memory.
+Default values: <code>NULL</code>.</p></td>
     </tr>
     <tr>
       <th>p</th>
       <td><p>a list with 'static' arguments common for <code>d</code> and <code>r</code>.
 By 'static', it is meant arguments that do not change during a sampling
 procedure, e.g. the rate of an exponentional prior or the boundaries of a
-uniform prior.</p></td>
+uniform prior. Default value: <code>NULL</code></p></td>
     </tr>
     <tr>
       <th>p.d</th>
       <td><p>a list of static arguments to be passed specifically to
-<code>d</code> (added to <code>p</code>).</p></td>
+<code>d</code> (added to <code>p</code>). Default value: <code>NULL</code>.</p></td>
     </tr>
     <tr>
       <th>p.r</th>
       <td><p>a list of static arguments to be passed specifically to
-<code>r</code> (added to <code>p</code>).</p></td>
+<code>r</code> (added to <code>p</code>). Default value: <code>NULL</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>

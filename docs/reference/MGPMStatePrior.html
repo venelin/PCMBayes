@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Construct an MGPMState object from a state vector — MGPMState • PCMBayes</title>
+<title>Create a MGPMStatePrior object for a MGPMState object — MGPMStatePrior • PCMBayes</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Construct an MGPMState object from a state vector — MGPMState" />
+<meta property="og:title" content="Create a MGPMStatePrior object for a MGPMState object — MGPMStatePrior" />
 
-<meta property="og:description" content="Construct an MGPMState object from a state vector" />
+<meta property="og:description" content="Create a MGPMStatePrior object for a MGPMState object" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -102,41 +102,36 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Construct an MGPMState object from a state vector</h1>
-    <small class="dont-index">Source: <a href='https://github.com/venelin/PCMBayes/blob/master/R/MGPMState.R'><code>R/MGPMState.R</code></a></small>
-    <div class="hidden name"><code>MGPMState.Rd</code></div>
+    <h1>Create a MGPMStatePrior object for a MGPMState object</h1>
+    <small class="dont-index">Source: <a href='https://github.com/venelin/PCMBayes/blob/master/R/MGPMStatePrior.R'><code>R/MGPMStatePrior.R</code></a></small>
+    <div class="hidden name"><code>MGPMStatePrior.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Construct an MGPMState object from a state vector</p>
+    <p>Create a MGPMStatePrior object for a MGPMState object</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>MGPMState</span>(<span class='no'>s</span>, <span class='no'>ctx</span>)</pre>
+    <pre class="usage"><span class='fu'>MGPMStatePrior</span>(<span class='no'>state</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>s</th>
-      <td><p>a numerical vector representing an MGPM state. Some of the entries
-in this vector are interpreted as integers denoting nodes in a tree,
-regimes or model types (see <code><a href='MGPMStateVector.html'>MGPMStateVector</a></code>).</p></td>
+      <th>state</th>
+      <td><p>a MGPMState object.</p></td>
     </tr>
     <tr>
-      <th>ctx</th>
-      <td><p>a MGPMContext object.</p></td>
+      <th>...</th>
+      <td><p>additional arguments to be stored as member elements in the
+returned MGPMStatePrior object.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a MGPMState object.</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='MGPMStateVector.html'>MGPMStateVector</a></code></p></div>
+    <p>an object of S3 class <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("MGPMStatePrior", "Prior")</a></code>.</p>
     
 
   </div>
@@ -146,8 +141,6 @@ regimes or model types (see <code><a href='MGPMStateVector.html'>MGPMStateVector
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

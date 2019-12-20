@@ -154,8 +154,8 @@ number of numeric parameters of the MGPM model represented by the state
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The MGPMState of an MCMC is represented by a numerical vector of the form:
-$$\vec{s}=(K, n_2,...,n_K, l_2,...,l_{K+1}, r_2,...,r_{K+1}, m_1,...,m_R, v_1,...,v_P)^T$$
+    <p>The MGPMState of an MCMC is represented by a numerical vector:
+$$\vec{s}=(K, n_2,...,n_{K+1}, l_2,...,l_{K+1}, r_2,...,r_{K+1}, m_1,...,m_R, v_1,...,v_P)^T$$
 The element of this vector are described as follows:</p><dl class='dl-horizontal'>
 <dt>\(K\): </dt><dd><p>number of shifts;</p></dd>
 <dt>\((n_2,...,n_{K+1})^T\): </dt><dd><p>shift nodes - the shifts in the model occur
@@ -170,8 +170,9 @@ tip-ward direction.</p></dd>
 vector with elements among \((N+1,n_2,...,n_{K+1})^T\), indicating the regime
 associated with each part in the tree. The regimes are named as the shift
 nodes, with N+1 corresponding to the part (and regime) originating at the
-root. It is possible to have lumped regimes, that is, different parts having
-the same regime. This regime-lumping must obey the following rules:
+root. It is possible to have lumped regimes, that is, different parts
+of the tree having the same regime. This regime-lumping must obey the
+following rules:
 <ol>
 <li><p>neighbor parts cannot have a lumped regime. Two parts originating at
 nodes \(n_i\) and \(n_j\) in the tree are called neighbor parts if they

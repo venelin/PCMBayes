@@ -2,7 +2,7 @@
 % Please edit documentation in R/MGPMState.R
 \name{MGPMStateVector}
 \alias{MGPMStateVector}
-\title{Construct an MGPM state vector.}
+\title{Construct a MGPM state vector.}
 \usage{
 MGPMStateVector(K, n, l, r, m, v)
 }
@@ -27,11 +27,11 @@ a numerical vector representing the concatenation of
 \code{K, n, l, r, m, v}, with S3 class set to 'MGPMStateVector'.
 }
 \description{
-Construct an MGPM state vector.
+Construct a MGPM state vector.
 }
 \details{
-The MGPMState of an MCMC is represented by a numerical vector of the form:
-\deqn{\vec{s}=(K, n_2,...,n_K, l_2,...,l_{K+1}, r_2,...,r_{K+1}, m_1,...,m_R, v_1,...,v_P)^T}
+The MGPMState of an MCMC is represented by a numerical vector:
+\deqn{\vec{s}=(K, n_2,...,n_{K+1}, l_2,...,l_{K+1}, r_2,...,r_{K+1}, m_1,...,m_R, v_1,...,v_P)^T}
 The element of this vector are described as follows:
 \describe{
 \item{\eqn{K}: }{number of shifts;}
@@ -47,8 +47,9 @@ tip-ward direction.}
 vector with elements among \eqn{(N+1,n_2,...,n_{K+1})^T}, indicating the regime
 associated with each part in the tree. The regimes are named as the shift
 nodes, with N+1 corresponding to the part (and regime) originating at the
-root. It is possible to have lumped regimes, that is, different parts having
-the same regime. This regime-lumping must obey the following rules:
+root. It is possible to have lumped regimes, that is, different parts
+of the tree having the same regime. This regime-lumping must obey the
+following rules:
 \enumerate{
 \item neighbor parts cannot have a lumped regime. Two parts originating at
 nodes \eqn{n_i} and \eqn{n_j} in the tree are called neighbor parts if they

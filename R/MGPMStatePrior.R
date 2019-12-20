@@ -1,49 +1,55 @@
-#' Check if an object is a PCMPrior object.
+#' Check if an object is a MGPMStatePrior object.
 #' @param o an R object.
 #' @return a logical indicating whether the S3 class of \code{o} inherits from
-#' \code{'PCMPrior'}.
+#' \code{'MGPMStatePrior'}.
 #' @export
-is.PCMPrior <- function(o) { inherits(o, "PCMPrior") }
+is.MGPMStatePrior <- function(o) { inherits(o, "MGPMStatePrior") }
 
-#' Create a PCMPrior object for a PCM model object
-#' @param model a PCM object.
+#' Create a MGPMStatePrior object for a MGPMState object
+#' @param state a MGPMState object.
 #' @param ...  additional arguments to be stored as member elements in the
-#' returned PCMPrior object.
-#' @return an object of S3 class \code{c("PCMPrior", "Prior")}.
+#' returned MGPMStatePrior object.
+#' @return an object of S3 class \code{c("MGPMStatePrior", "Prior")}.
 #' @export
-PCMPrior <- function(model, ...) {
+MGPMStatePrior <- function(state, ...) {
   structure(
-    list(priors = PCMCombineListAttribute(model, "prior"), ...),
-    class = c("PCMPrior", "Prior"))
+    list(priors = PCMCombineListAttribute(state, "prior"), ...),
+    class = c("MGPMStatePrior", "Prior"))
 }
 
+
 #' @export
-AddPrior.PCM <- function(
+AddPrior.MGPMState <- function(
   o, member = "", enclos = "?", prior, inplace = TRUE) {
 
   if(!is.Prior(prior)) {
     stop(
-      "AddPrior:: The argument prior should inherit from S3 class Prior.")
+      "AddPrior.MGPMState:: The argument prior should inherit from S3 class Prior.")
   }
+
+  if(!member %in% c())
+
+
+
 
   if(inplace) {
     eval(substitute(PCMAddToListAttribute(
       name = "prior", value = prior, object = o, member = member,
-      enclos = enclos, inplace = TRUE)),
+      enclos = enclos, spec = FALSE, fixed = TRUE, inplace = TRUE)),
       parent.frame())
   } else {
     o <- PCMAddToListAttribute(
       name = "prior", value = prior, object = o, member = member,
-      enclos = enclos, inplace = FALSE)
+      enclos = enclos, spec = FALSE, fixed = TRUE, inplace = FALSE)
     o
   }
 }
 
 #' @export
-PriorDensity.PCMPrior <- function(prior, vecParams, log = TRUE, ...) {
+PriorDensity.MGPMStatePrior <- function(prior, vecParams, log = TRUE, ...) {
   vecDens <- rep(NA_real_, length(vecParams))
   if(!is.list(prior$priors)) {
-    stop(paste0("PriorDensity.PCMPrior:: the member prior$priors ",
+    stop(paste0("PriorDensity.MGPMStatePrior:: the member prior$priors ",
                 "should be a list of Prior objects."))
   } else {
     for(pr in prior$priors) {
@@ -56,5 +62,3 @@ PriorDensity.PCMPrior <- function(prior, vecParams, log = TRUE, ...) {
     }
   }
 }
-
-

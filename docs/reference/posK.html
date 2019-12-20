@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Construct an MGPMState object from a state vector — MGPMState • PCMBayes</title>
+<title>Indices of different parts of an MGPMState in an MGPMStateVector — posK • PCMBayes</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,12 @@
 
 
 
-<meta property="og:title" content="Construct an MGPMState object from a state vector — MGPMState" />
+<meta property="og:title" content="Indices of different parts of an MGPMState in an MGPMStateVector — posK" />
 
-<meta property="og:description" content="Construct an MGPMState object from a state vector" />
+<meta property="og:description" content="The different parts of an MGPMState are described in
+MGPMStateVector. posK returns the osition of the
+ number of shifts (this is always equal to 1). See the section functions
+ for the others." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -102,41 +105,65 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Construct an MGPMState object from a state vector</h1>
+    <h1>Indices of different parts of an MGPMState in an MGPMStateVector</h1>
     <small class="dont-index">Source: <a href='https://github.com/venelin/PCMBayes/blob/master/R/MGPMState.R'><code>R/MGPMState.R</code></a></small>
-    <div class="hidden name"><code>MGPMState.Rd</code></div>
+    <div class="hidden name"><code>posK.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Construct an MGPMState object from a state vector</p>
+    <p>The different parts of an MGPMState are described in
+<code><a href='MGPMStateVector.html'>MGPMStateVector</a></code>. <code>posK</code> returns the osition of the
+ number of shifts (this is always equal to 1). See the section functions
+ for the others.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>MGPMState</span>(<span class='no'>s</span>, <span class='no'>ctx</span>)</pre>
+    <pre class="usage"><span class='fu'>posK</span>(<span class='no'>s</span>, <span class='kw'>ctx</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>posn</span>(<span class='no'>s</span>, <span class='kw'>ctx</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>posl</span>(<span class='no'>s</span>, <span class='kw'>ctx</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>posr</span>(<span class='no'>s</span>, <span class='kw'>ctx</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>posm</span>(<span class='no'>s</span>, <span class='kw'>ctx</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>posv</span>(<span class='no'>s</span>, <span class='kw'>ctx</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>s</th>
-      <td><p>a numerical vector representing an MGPM state. Some of the entries
-in this vector are interpreted as integers denoting nodes in a tree,
-regimes or model types (see <code><a href='MGPMStateVector.html'>MGPMStateVector</a></code>).</p></td>
+      <td><p>a <code><a href='MGPMState.html'>MGPMState</a></code> or a <code><a href='MGPMStateVector.html'>MGPMStateVector</a></code>
+object.</p></td>
     </tr>
     <tr>
       <th>ctx</th>
-      <td><p>a MGPMContext object.</p></td>
+      <td><p>a <code><a href='MGPMContext.html'>MGPMContext</a></code> object. This is needed only if
+<code>s</code> is <code><a href='MGPMStateVector.html'>MGPMStateVector</a></code> object.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a MGPMState object.</p>
+    <p>an integer vector.</p>
+    
+    <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
+
+    <ul>
+<li><p><code>posn</code>: Positions of the shift nodes;</p></li>
+<li><p><code>posl</code>: Positions of the offsets of the shift-points in tip-ward direction
+relative to the beginnings of the branches leading to shift nodes;</p></li>
+<li><p><code>posr</code>: Position of the regime id's for each shift node;</p></li>
+<li><p><code>posm</code>: Positions of the model type id's for each regime;</p></li>
+<li><p><code>posv</code>: Positions of the model parameters.</p></li>
+</ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='MGPMStateVector.html'>MGPMStateVector</a></code></p></div>
+    <div class='dont-index'><p><code><a href='MGPMState.html'>MGPMState</a></code>, <code><a href='MGPMStateVector.html'>MGPMStateVector</a></code></p></div>
     
 
   </div>
@@ -146,6 +173,8 @@ regimes or model types (see <code><a href='MGPMStateVector.html'>MGPMStateVector
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#functions">Functions</a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>

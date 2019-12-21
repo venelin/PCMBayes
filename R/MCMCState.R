@@ -1,47 +1,47 @@
-#' Check if an object is of S3 class 'MGPMState'
+#' Check if an object is of S3 class 'MCMCState'
 #' @param o an object.
 #' @return a logical.
 #' @export
-is.MGPMState <- function(o) {
-  inherits(o, "MGPMState")
+is.MCMCState <- function(o) {
+  inherits(o, "MCMCState")
 }
 
-#' If necessary, convert an object to an MGPMState object.
-#' @param s a \code{\link{MGPMState}} or a \code{\link{MGPMStateVector}}
+#' If necessary, convert an object to an MCMCState object.
+#' @param s a \code{\link{MCMCState}} or a \code{\link{MCMCStateVector}}
 #' object.
-#' @param ctx a \code{\link{MGPMContext}} object. This is needed only if
-#'  \code{s} is \code{\link{MGPMStateVector}} object.
+#' @param ctx a \code{\link{MCMCContext}} object. This is needed only if
+#'  \code{s} is \code{\link{MCMCStateVector}} object.
 #'
-#' @return an MGPMState object corresponding to \code{s}. If \code{s} is already
-#' a \code{\link{MGPMState}} object, it is returned as is. Otherwise, a
-#' \code{\link{MGPMState}} object is constructed from \code{s} and \code{ctx}.
+#' @return an MCMCState object corresponding to \code{s}. If \code{s} is already
+#' a \code{\link{MCMCState}} object, it is returned as is. Otherwise, a
+#' \code{\link{MCMCState}} object is constructed from \code{s} and \code{ctx}.
 #' @export
-as.MGPMState <- function(s, ctx = NULL) {
-  if(is.MGPMState(s)) {
+as.MCMCState <- function(s, ctx = NULL) {
+  if(is.MCMCState(s)) {
     s
-  } else if(is.MGPMStateVector(s)) {
-    if(!is.MGPMContext(ctx)) {
+  } else if(is.MCMCStateVector(s)) {
+    if(!is.MCMCContext(ctx)) {
       stop(paste0(
-        "as.MGPMState: ctx must be a MGPMContext object if s is a ",
-        "MGPMStateVector."))
+        "as.MCMCState: ctx must be a MCMCContext object if s is a ",
+        "MCMCStateVector."))
     }
-    s <- MGPMState(s, ctx)
+    s <- MCMCState(s, ctx)
   } else {
-    stop("as.MGPMState: s be a MGPMState or a MGPMStateVector object.")
+    stop("as.MCMCState: s be a MCMCState or a MCMCStateVector object.")
   }
 }
 
-#' Construct a MGPMState object from a state vector
+#' Construct a MCMCState object from a state vector
 #'
-#' @param s a numerical vector representing a MGPM state. Some of the
+#' @param s a numerical vector representing a MCMC state. Some of the
 #'  entries in this vector are interpreted as integers denoting nodes in a
-#'  tree, regimes or model types (see \code{\link{MGPMStateVector}}).
-#' @param ctx a MGPMContext object.
-#' @return a MGPMState object.
+#'  tree, regimes or model types (see \code{\link{MCMCStateVector}}).
+#' @param ctx a MCMCContext object.
+#' @return a MCMCState object.
 #'
-#' @seealso \code{\link{MGPMStateVector}}
+#' @seealso \code{\link{MCMCStateVector}}
 #' @export
-MGPMState <- function(s, ctx) {
+MCMCState <- function(s, ctx) {
   # number of tips
   N <- PCMTreeNumTips(ctx$tree)
 
@@ -64,7 +64,7 @@ MGPMState <- function(s, ctx) {
     # number of shifts
     K <- as.integer(s[1L])
     if(K > 0L && !(length(s) >= 1L + K + K + K)) {
-      stop(paste0("MGPMState:: The vector s is wrong length, given that K=", K,
+      stop(paste0("MCMCState:: The vector s is wrong length, given that K=", K,
                   ". It should have at least ", 1L + K + K + K, " elements."))
     } else {
       # shift nodes
@@ -120,7 +120,7 @@ MGPMState <- function(s, ctx) {
       }
       names(m) <- regimeNames
 
-      # Create the MGPM object
+      # Create the MCMC object
       namesModelTypes <- NamesModelTypes(ctx$model)
       model <- do.call(
         MixedGaussian,
@@ -140,7 +140,7 @@ MGPMState <- function(s, ctx) {
       P1 <- PCMParamLoadOrStore(model, v, offset = 0, k = ctx$k, R = R,load = TRUE)
       if(P != P1) {
         stop(paste0(
-          "MGPMState:: something is wrong with the attribute p of the model",
+          "MCMCState:: something is wrong with the attribute p of the model",
           " and the number of parameters returned by PCMParamLoadOrStore."))
       }
     }
@@ -149,20 +149,20 @@ MGPMState <- function(s, ctx) {
   structure(list(
     K = K, R = R, P = P, n = n, l = l, r = r, m = m,
     v = v, model = model, tree = tree),
-    class = "MGPMState")
+    class = "MCMCState")
 }
 
 
 
-#' Check if an object is of S3 class 'MGPMStateVector'
+#' Check if an object is of S3 class 'MCMCStateVector'
 #' @param o an object.
 #' @return a logical.
 #' @export
-is.MGPMStateVector <- function(o) {
-  inherits(o, "MGPMStateVector")
+is.MCMCStateVector <- function(o) {
+  inherits(o, "MCMCStateVector")
 }
 
-#' Construct a MGPM state vector.
+#' Construct a MCMC state vector.
 #'
 #' @param K an integer (see Details).
 #' @param n an integer vector of length \code{K} denoting shift nodes (see Details).
@@ -171,13 +171,13 @@ is.MGPMStateVector <- function(o) {
 #' @param m an integer vector of length \code{R}, where \code{R} denotes the
 #' total number of regimes (see Details).
 #' @param v a real vector of length \code{P}, where \code{P} denotes the total
-#' number of numeric parameters of the MGPM model represented by the state
+#' number of numeric parameters of the MCMC model represented by the state
 #' (see Details).
 #' @return a numerical vector representing the concatenation of
-#' \code{K, n, l, r, m, v}, with S3 class set to 'MGPMStateVector'.
+#' \code{K, n, l, r, m, v}, with S3 class set to 'MCMCStateVector'.
 #'
 #' @details
-#' The MGPMState of an MCMC is represented by a numerical vector:
+#' The MCMCState of an MCMC is represented by a numerical vector:
 #' \deqn{\vec{s}=(K, n_2,...,n_{K+1}, l_2,...,l_{K+1}, r_2,...,r_{K+1}, m_1,...,m_R, v_1,...,v_P)^T}
 #' The element of this vector are described as follows:
 #' \describe{
@@ -214,31 +214,31 @@ is.MGPMStateVector <- function(o) {
 #' \code{\link{PCMParamLoadOrStore}}. This is a vectorized form of all model
 #' parameters.}
 #' }
-#' @seealso \code{\link{MGPMState}}
+#' @seealso \code{\link{MCMCState}}
 #' @export
-MGPMStateVector <- function(K, n, l, r, m, v) {
+MCMCStateVector <- function(K, n, l, r, m, v) {
   structure(
     c(as.double(K), as.double(n), as.double(l), as.double(r), as.double(m),
       as.double(v)),
-    class = c("MGPMStateVector"))
+    class = c("MCMCStateVector"))
 }
 
 
-#' @title Indices of different parts of an MGPMState in an MGPMStateVector
+#' @title Indices of different parts of an MCMCState in an MCMCStateVector
 #'
-#' @description The different parts of an MGPMState are described in
-#' \code{\link{MGPMStateVector}}. \code{posK} returns the osition of the
+#' @description The different parts of an MCMCState are described in
+#' \code{\link{MCMCStateVector}}. \code{posK} returns the osition of the
 #'  number of shifts (this is always equal to 1). See the section functions
 #'  for the others.
 #'
-#' @param s a \code{\link{MGPMState}} or a \code{\link{MGPMStateVector}}
+#' @param s a \code{\link{MCMCState}} or a \code{\link{MCMCStateVector}}
 #' object.
-#' @param ctx a \code{\link{MGPMContext}} object. This is needed only if
-#'  \code{s} is \code{\link{MGPMStateVector}} object.
+#' @param ctx a \code{\link{MCMCContext}} object. This is needed only if
+#'  \code{s} is \code{\link{MCMCStateVector}} object.
 #'
 #' @return an integer vector.
 #'
-#' @seealso \code{\link{MGPMState}}, \code{\link{MGPMStateVector}}
+#' @seealso \code{\link{MCMCState}}, \code{\link{MCMCStateVector}}
 #' @export
 posK <- function(s, ctx = NULL) {
   1L
@@ -250,7 +250,7 @@ posK <- function(s, ctx = NULL) {
 #'
 #' @export
 posn <- function(s, ctx = NULL) {
-  s <- as.MGPMState(s, ctx)
+  s <- as.MCMCState(s, ctx)
   1L + seq_len(s$K)
 }
 
@@ -261,7 +261,7 @@ posn <- function(s, ctx = NULL) {
 #'
 #' @export
 posl <- function(s, ctx = NULL) {
-  s <- as.MGPMState(s, ctx)
+  s <- as.MCMCState(s, ctx)
   1L + s$K + seq_len(s$K)
 }
 
@@ -271,7 +271,7 @@ posl <- function(s, ctx = NULL) {
 #'
 #' @export
 posr <- function(s, ctx = NULL) {
-  s <- as.MGPMState(s, ctx)
+  s <- as.MCMCState(s, ctx)
   1L + s$K + s$K + seq_len(s$K)
 }
 
@@ -281,7 +281,7 @@ posr <- function(s, ctx = NULL) {
 #'
 #' @export
 posm <- function(s, ctx = NULL) {
-  s <- as.MGPMState(s, ctx)
+  s <- as.MCMCState(s, ctx)
   1L + s$K + s$K + s$K + seq_len(s$R)
 }
 
@@ -291,8 +291,30 @@ posm <- function(s, ctx = NULL) {
 #'
 #' @export
 posv <- function(s, ctx = NULL) {
-  s <- as.MGPMState(s, ctx)
+  s <- as.MCMCState(s, ctx)
   1L + s$K + s$K + s$K + s$R + seq_len(s$P)
+}
+
+#' @export
+AddPrior.MCMCState <- function(
+  o, member = "", enclos = "?", prior, inplace = TRUE) {
+
+  if(!is.Prior(prior)) {
+    stop(
+      "AddPrior.MCMCState:: The argument prior should inherit from S3 class Prior.")
+  }
+
+  if(inplace) {
+    eval(substitute(PCMAddToListAttribute(
+      name = "prior", value = prior, object = o, member = member,
+      enclos = enclos, spec = FALSE, fixed = TRUE, inplace = TRUE)),
+      parent.frame())
+  } else {
+    o <- PCMAddToListAttribute(
+      name = "prior", value = prior, object = o, member = member,
+      enclos = enclos, spec = FALSE, fixed = TRUE, inplace = FALSE)
+    o
+  }
 }
 
 

@@ -31,16 +31,27 @@ ParameterPrior <- function(
 }
 
 #' @export
-PriorDensity.ParameterPrior <- function(prior, vecParams, log = TRUE, ...) {
+PriorDensity.ParameterPrior <- function(
+  prior, vecParams, log = TRUE, returnVector = TRUE, ...) {
+
   if(is.function(prior$d)) {
     do.call(prior$d, c(list(v = vecParams, log = log), prior$p, prior$p.d))
   } else if(is.character(prior$d)) {
     d <- get(prior$d)
     if(!is.function(d)) {
-      stop(paste0("PriorDensity.ParameterPrior:: ", prior$d,
-                  "could not be found."))
+      stop(paste0(
+        "PriorDensity.ParameterPrior:: ", prior$d, "could not be found."))
     } else {
-      do.call(d, c(list(vecParams, log = log), prior$p, prior$p.d))
+      vecDens <- do.call(d, c(list(vecParams, log = log), prior$p, prior$p.d))
+      if(returnVector) {
+        vecDens
+      } else {
+        if(log) {
+          sum(vecDens)
+        } else {
+          prod(vecDens)
+        }
+      }
     }
   } else {
     stop(

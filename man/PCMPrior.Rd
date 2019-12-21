@@ -13,7 +13,7 @@ PCMPrior(model, ...)
 returned PCMPrior object.}
 }
 \value{
-an object of S3 class \code{c("PCMPrior", "Prior")}.
+an object of S3 class \code{c("PCMPrior", "CompositePrior", "Prior")}.
 }
 \description{
 Create a PCMPrior object for a PCM model object

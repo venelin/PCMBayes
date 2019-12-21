@@ -22,6 +22,11 @@ You can install the development version from
 devtools::install_github("venelin/PCMBayes")
 ```
 
-## Example
+## Resources
 
-Coming soon\!
+The user guides and technical reference for the package are available
+from the [PCMBayes web-page](https://venelin.github.io/PCMBayes/).
+
+  - The [Getting
+    started](https://venelin.github.io/PCMBayes/articles/PCMBayes.html)
+    guide;

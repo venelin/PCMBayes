@@ -1,10 +1,10 @@
-#' Context of a MGPM used for MCMC sampling
+#' Context of a MCMC
 #' @import PCMBase
 #' @inheritParams PCMBase::PCMLik
-#' @param model a MGPM template used to build MGPM model objects.
-#' @return an object of S3 class 'MGPMContext'.
+#' @param model a template used to build MixedGaussian model objects.
+#' @return an object of S3 class 'MCMCContext'.
 #' @export
-MGPMContext <- function(
+MCMCContext <- function(
   X, tree, model, SE = matrix(0, PCMNumTraits(model), PCMTreeNumTips(tree))) {
 
   ctx <- list(
@@ -15,7 +15,7 @@ MGPMContext <- function(
     treeOriginal = tree,
     tree = PCMTree(tree))
   PCMTreeSetLabels(ctx$tree)
-  class(ctx) <- "MGPMContext"
+  class(ctx) <- "MCMCContext"
   ctx
 }
 

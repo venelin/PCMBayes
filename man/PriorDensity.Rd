@@ -4,30 +4,33 @@
 \alias{PriorDensity}
 \title{Evaluate a prior distribution density over parameter values.}
 \usage{
-PriorDensity(prior, vecParams, log = TRUE, ...)
+PriorDensity(prior, vecParams, log = TRUE, returnVector = TRUE...)
 }
 \arguments{
-\item{prior}{a PCMPrior object.}
+\item{prior}{a Prior object.}
 
 \item{vecParams}{a numerical vector.}
 
 \item{log}{logical indicating if a log-prior should be returned
 (default: TRUE).}
 
+\item{returnVector}{logical indicating if a vector of length
+\code{length(vecParams)} should be returned. Default: \code{TRUE}.}
+
 \item{...}{additional arguments passed to methods.}
 }
 \value{
-The returned value depends on the S3 class of \code{prior}.
+The returned value depends on \code{returnVector}:
 \itemize{
-\item For any class except \code{'PCMPrior'}, it should be a numeric
+\item If \code{returnVector} is \code{TRUE} (default) it should be a numeric
 vector of length equal to \code{length(vecParams)}.
-If the the prior distributions for the elements in \code{vecParams},
+If the prior distributions for the elements in \code{vecParams},
 are independent, then each element in the returned vector corresponds to the
 (log-)prior density of the corresponding element in \code{vecParams}.
 Otherwise, the first element in the returned vector corresponds to the
 joint (log-)prior density and the other elements are set to 1 (if
 \code{log=FALSE}) or to 0 (if \code{log=TRUE}).
-\item For class \code{'PCMPrior'}, this should be a single real
+\item If \code{returnVector} is \code{FALSE}, this should be a single real
 number corresponding to the joint prior (log-)density of the elements in
 \code{vecParams}.
 }

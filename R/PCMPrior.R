@@ -9,21 +9,53 @@ is.PCMPrior <- function(o) { inherits(o, "PCMPrior") }
 #' @param model a PCM object.
 #' @param ...  additional arguments to be stored as member elements in the
 #' returned PCMPrior object.
-#' @return an object of S3 class \code{c("PCMPrior", "Prior")}.
+#' @return an object of S3 class \code{c("PCMPrior", "CompositePrior", "Prior")}.
 #' @export
 PCMPrior <- function(model, ...) {
   structure(
     list(priors = PCMCombineListAttribute(model, "prior"), ...),
-    class = c("PCMPrior", "Prior"))
+    class = c("PCMPrior", "CompositePrior", "Prior"))
 }
 
+#' Add a prior to a PCM object
+#'
+#' @inheritParams PCMBase::PCMAddToListAttribute
+#' @param o a PCM object.
+#' @param prior a prior object.
+#' @return if inplace is TRUE (default) nothing is returned. Otherwise, a
+#' modified version of \code{o} is returned.
+#'
+#' @examples
+#' library(PCMBase)
+#' model <- PCMBaseTestObjects$model_MixedGaussian_ab
+#'
+#' PCMAddPrior(
+#'   model,
+#'   prior = ParameterPrior(
+#'     d = "dunif", r = "runif",
+#'     p = list(min = PCMParamGetShortVector(PCMParamLowerLimit(model)),
+#'              max = PCMParamGetShortVector(PCMParamUpperLimit(model)))))
+#'
+#' PCMAddPrior(
+#'   model, "a$Sigma_x", enclos = "diag(?[,,1])",
+#'   prior = ParameterPrior(
+#'     d = "dunif", r = "runif",
+#'     p = list(min = c(0.2, 0.1, 0.1), max = c(5, 5, 5))))
+#'
+#' modelPrior <- PCMPrior(model)
+#' vec <- PCMParamGetShortVector(model)
+#' PriorDensity(modelPrior, vec)
 #' @export
-AddPrior.PCM <- function(
+PCMAddPrior <- function(
   o, member = "", enclos = "?", prior, inplace = TRUE) {
 
+  if(!is.PCM(o)) {
+    stop(
+      "PCMAddPrior:: The argument o should inherit from S3 class PCM.")
+  }
   if(!is.Prior(prior)) {
     stop(
-      "AddPrior:: The argument prior should inherit from S3 class Prior.")
+      "PCMAddPrior:: The argument prior should inherit from S3 class Prior.")
   }
 
   if(inplace) {
@@ -36,24 +68,6 @@ AddPrior.PCM <- function(
       name = "prior", value = prior, object = o, member = member,
       enclos = enclos, inplace = FALSE)
     o
-  }
-}
-
-#' @export
-PriorDensity.PCMPrior <- function(prior, vecParams, log = TRUE, ...) {
-  vecDens <- rep(NA_real_, length(vecParams))
-  if(!is.list(prior$priors)) {
-    stop(paste0("PriorDensity.PCMPrior:: the member prior$priors ",
-                "should be a list of Prior objects."))
-  } else {
-    for(pr in prior$priors) {
-      vecDens[pr$pos] <- PriorDensity(pr, vecParams[pr$pos], log = log, ...)
-    }
-    if(log) {
-      sum(vecDens)
-    } else {
-      prod(vecDens)
-    }
   }
 }
 

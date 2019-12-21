@@ -113,14 +113,14 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>PriorDensity</span>(<span class='no'>prior</span>, <span class='no'>vecParams</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>PriorDensity</span>(<span class='no'>prior</span>, <span class='no'>vecParams</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>returnVector</span> <span class='kw'>=</span> <span class='no'>TRUE...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>prior</th>
-      <td><p>a PCMPrior object.</p></td>
+      <td><p>a Prior object.</p></td>
     </tr>
     <tr>
       <th>vecParams</th>
@@ -132,6 +132,11 @@
 (default: TRUE).</p></td>
     </tr>
     <tr>
+      <th>returnVector</th>
+      <td><p>logical indicating if a vector of length
+<code><a href='https://www.rdocumentation.org/packages/base/topics/length'>length(vecParams)</a></code> should be returned. Default: <code>TRUE</code>.</p></td>
+    </tr>
+    <tr>
       <th>...</th>
       <td><p>additional arguments passed to methods.</p></td>
     </tr>
@@ -139,16 +144,16 @@
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The returned value depends on the S3 class of <code>prior</code>.</p><ul>
-<li><p>For any class except <code>'PCMPrior'</code>, it should be a numeric
+    <p>The returned value depends on <code>returnVector</code>:</p><ul>
+<li><p>If <code>returnVector</code> is <code>TRUE</code> (default) it should be a numeric
 vector of length equal to <code><a href='https://www.rdocumentation.org/packages/base/topics/length'>length(vecParams)</a></code>.
-If the the prior distributions for the elements in <code>vecParams</code>,
+If the prior distributions for the elements in <code>vecParams</code>,
 are independent, then each element in the returned vector corresponds to the
 (log-)prior density of the corresponding element in <code>vecParams</code>.
 Otherwise, the first element in the returned vector corresponds to the
 joint (log-)prior density and the other elements are set to 1 (if
 <code>log=FALSE</code>) or to 0 (if <code>log=TRUE</code>).</p></li>
-<li><p>For class <code>'PCMPrior'</code>, this should be a single real
+<li><p>If <code>returnVector</code> is <code>FALSE</code>, this should be a single real
 number corresponding to the joint prior (log-)density of the elements in
 <code>vecParams</code>.</p></li>
 </ul>

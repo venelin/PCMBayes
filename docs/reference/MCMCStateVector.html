@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Indices of different parts of an MCMCState in an MCMCStateVector — posK • PCMBayes</title>
+<title>Construct a MCMC state vector. — MCMCStateVector • PCMBayes</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,12 +30,9 @@
 
 
 
-<meta property="og:title" content="Indices of different parts of an MCMCState in an MCMCStateVector — posK" />
+<meta property="og:title" content="Construct a MCMC state vector. — MCMCStateVector" />
 
-<meta property="og:description" content="The different parts of an MCMCState are described in
-MCMCStateVector. posK returns the osition of the
- number of shifts (this is always equal to 1). See the section functions
- for the others." />
+<meta property="og:description" content="Construct a MCMC state vector." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -105,65 +102,98 @@ MCMCStateVector. posK returns the osition of the
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Indices of different parts of an MCMCState in an MCMCStateVector</h1>
+    <h1>Construct a MCMC state vector.</h1>
     <small class="dont-index">Source: <a href='https://github.com/venelin/PCMBayes/blob/master/R/MCMCState.R'><code>R/MCMCState.R</code></a></small>
-    <div class="hidden name"><code>posK.Rd</code></div>
+    <div class="hidden name"><code>MCMCStateVector.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>The different parts of an MCMCState are described in
-<code><a href='MCMCStateVector.html'>MCMCStateVector</a></code>. <code>posK</code> returns the osition of the
- number of shifts (this is always equal to 1). See the section functions
- for the others.</p>
+    <p>Construct a MCMC state vector.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>posK</span>(<span class='no'>s</span>, <span class='kw'>ctx</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'>posn</span>(<span class='no'>s</span>, <span class='kw'>ctx</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'>posl</span>(<span class='no'>s</span>, <span class='kw'>ctx</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'>posr</span>(<span class='no'>s</span>, <span class='kw'>ctx</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'>posm</span>(<span class='no'>s</span>, <span class='kw'>ctx</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'>posv</span>(<span class='no'>s</span>, <span class='kw'>ctx</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>MCMCStateVector</span>(<span class='no'>K</span>, <span class='no'>n</span>, <span class='no'>l</span>, <span class='no'>r</span>, <span class='no'>m</span>, <span class='no'>v</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>s</th>
-      <td><p>a <code><a href='MCMCState.html'>MCMCState</a></code> or a <code><a href='MCMCStateVector.html'>MCMCStateVector</a></code>
-object.</p></td>
+      <th>K</th>
+      <td><p>an integer (see Details).</p></td>
     </tr>
     <tr>
-      <th>ctx</th>
-      <td><p>a <code><a href='MCMCContext.html'>MCMCContext</a></code> object. This is needed only if
-<code>s</code> is <code><a href='MCMCStateVector.html'>MCMCStateVector</a></code> object.</p></td>
+      <th>n</th>
+      <td><p>an integer vector of length <code>K</code> denoting shift nodes (see Details).</p></td>
+    </tr>
+    <tr>
+      <th>l</th>
+      <td><p>a real vector of length <code>K</code> (see Details).</p></td>
+    </tr>
+    <tr>
+      <th>r</th>
+      <td><p>an integer vector of length <code>K</code> (see Details).</p></td>
+    </tr>
+    <tr>
+      <th>m</th>
+      <td><p>an integer vector of length <code>R</code>, where <code>R</code> denotes the
+total number of regimes (see Details).</p></td>
+    </tr>
+    <tr>
+      <th>v</th>
+      <td><p>a real vector of length <code>P</code>, where <code>P</code> denotes the total
+number of numeric parameters of the MCMC model represented by the state
+(see Details).</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>an integer vector.</p>
+    <p>a numerical vector representing the concatenation of
+<code>K, n, l, r, m, v</code>, with S3 class set to 'MCMCStateVector'.</p>
     
-    <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <ul>
-<li><p><code>posn</code>: Positions of the shift nodes;</p></li>
-<li><p><code>posl</code>: Positions of the offsets of the shift-points in tip-ward direction
-relative to the beginnings of the branches leading to shift nodes;</p></li>
-<li><p><code>posr</code>: Position of the regime id's for each shift node;</p></li>
-<li><p><code>posm</code>: Positions of the model type id's for each regime;</p></li>
-<li><p><code>posv</code>: Positions of the model parameters.</p></li>
-</ul>
+    <p>The MCMCState of an MCMC is represented by a numerical vector:
+$$\vec{s}=(K, n_2,...,n_{K+1}, l_2,...,l_{K+1}, r_2,...,r_{K+1}, m_1,...,m_R, v_1,...,v_P)^T$$
+The element of this vector are described as follows:</p><dl class='dl-horizontal'>
+<dt>\(K\): </dt><dd><p>number of shifts;</p></dd>
+<dt>\((n_2,...,n_{K+1})^T\): </dt><dd><p>shift nodes - the shifts in the model occur
+at points within the branches leading to the shift nodes in tip-ward
+direction. The corresponding locations of these points are specified by
+\((l_2,...,l_{K+1})^T\). The nodes \((n_2,...,n_{K+1})^T\) should be ordered
+according to <code>PCMTreePreorder(ctx$tree)</code>.</p></dd>
+<dt>\((l_2,...,l_{K+1})^T\): </dt><dd><p>offset of the shift points measured as
+distances from the beginnings of the branches leading to shift nodes in
+tip-ward direction.</p></dd>
+<dt>\((r_2,...,r_{K+1})^T\): </dt><dd><p>regime index vector. This is an integer
+vector with elements among \((N+1,n_2,...,n_{K+1})^T\), indicating the regime
+associated with each part in the tree. The regimes are named as the shift
+nodes, with N+1 corresponding to the part (and regime) originating at the
+root. It is possible to have lumped regimes, that is, different parts
+of the tree having the same regime. This regime-lumping must obey the
+following rules:
+<ol>
+<li><p>neighbor parts cannot have a lumped regime. Two parts originating at
+nodes \(n_i\) and \(n_j\) in the tree are called neighbor parts if they
+are separated solely by \(n_i\) or by \(n_j\);</p></li>
+<li><p>to resolve the conflict between the shift nodes of the different parts
+covered by a lumped regime, it is established that the name of a lumped
+regime must equal the shift-node that appears first, according to
+<code>PCMTreePreorder(ctx$tree)</code>.</p></li>
+</ol></p></dd>
+<dt>\((m_1,...,m_R)^T\): </dt><dd><p>model type assignment to the unique regimes.
+This is an integer vector with elements between 1 and M, M denoting the
+total number of model types possible. Each element corresponds to an
+element in <code>unique(c(N+1,r_2,...,r_{K+1}))</code></p></dd>
+<dt>\((v_1,...,v_P)^T\): </dt><dd><p>real numbers passed to
+<code>PCMParamLoadOrStore</code>. This is a vectorized form of all model
+parameters.</p></dd>
+</dl>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='MCMCState.html'>MCMCState</a></code>, <code><a href='MCMCStateVector.html'>MCMCStateVector</a></code></p></div>
+    <div class='dont-index'><p><code><a href='MCMCState.html'>MCMCState</a></code></p></div>
     
 
   </div>
@@ -174,7 +204,7 @@ relative to the beginnings of the branches leading to shift nodes;</p></li>
       
       <li><a href="#value">Value</a></li>
 
-      <li><a href="#functions">Functions</a></li>
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
           </ul>

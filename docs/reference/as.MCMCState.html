@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Indices of different parts of an MCMCState in an MCMCStateVector — posK • PCMBayes</title>
+<title>If necessary, convert an object to an MCMCState object. — as.MCMCState • PCMBayes</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,12 +30,9 @@
 
 
 
-<meta property="og:title" content="Indices of different parts of an MCMCState in an MCMCStateVector — posK" />
+<meta property="og:title" content="If necessary, convert an object to an MCMCState object. — as.MCMCState" />
 
-<meta property="og:description" content="The different parts of an MCMCState are described in
-MCMCStateVector. posK returns the osition of the
- number of shifts (this is always equal to 1). See the section functions
- for the others." />
+<meta property="og:description" content="If necessary, convert an object to an MCMCState object." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -105,31 +102,18 @@ MCMCStateVector. posK returns the osition of the
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Indices of different parts of an MCMCState in an MCMCStateVector</h1>
+    <h1>If necessary, convert an object to an MCMCState object.</h1>
     <small class="dont-index">Source: <a href='https://github.com/venelin/PCMBayes/blob/master/R/MCMCState.R'><code>R/MCMCState.R</code></a></small>
-    <div class="hidden name"><code>posK.Rd</code></div>
+    <div class="hidden name"><code>as.MCMCState.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>The different parts of an MCMCState are described in
-<code><a href='MCMCStateVector.html'>MCMCStateVector</a></code>. <code>posK</code> returns the osition of the
- number of shifts (this is always equal to 1). See the section functions
- for the others.</p>
+    <p>If necessary, convert an object to an MCMCState object.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>posK</span>(<span class='no'>s</span>, <span class='kw'>ctx</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'>posn</span>(<span class='no'>s</span>, <span class='kw'>ctx</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'>posl</span>(<span class='no'>s</span>, <span class='kw'>ctx</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'>posr</span>(<span class='no'>s</span>, <span class='kw'>ctx</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'>posm</span>(<span class='no'>s</span>, <span class='kw'>ctx</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'>posv</span>(<span class='no'>s</span>, <span class='kw'>ctx</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>as.MCMCState</span>(<span class='no'>s</span>, <span class='kw'>ctx</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -148,22 +132,9 @@ object.</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>an integer vector.</p>
-    
-    <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
-
-    <ul>
-<li><p><code>posn</code>: Positions of the shift nodes;</p></li>
-<li><p><code>posl</code>: Positions of the offsets of the shift-points in tip-ward direction
-relative to the beginnings of the branches leading to shift nodes;</p></li>
-<li><p><code>posr</code>: Position of the regime id's for each shift node;</p></li>
-<li><p><code>posm</code>: Positions of the model type id's for each regime;</p></li>
-<li><p><code>posv</code>: Positions of the model parameters.</p></li>
-</ul>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='MCMCState.html'>MCMCState</a></code>, <code><a href='MCMCStateVector.html'>MCMCStateVector</a></code></p></div>
+    <p>an MCMCState object corresponding to <code>s</code>. If <code>s</code> is already
+a <code><a href='MCMCState.html'>MCMCState</a></code> object, it is returned as is. Otherwise, a
+<code><a href='MCMCState.html'>MCMCState</a></code> object is constructed from <code>s</code> and <code>ctx</code>.</p>
     
 
   </div>
@@ -173,10 +144,6 @@ relative to the beginnings of the branches leading to shift nodes;</p></li>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#functions">Functions</a></li>
-
-      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

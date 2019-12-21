@@ -1,10 +1,10 @@
 Package: PCMBayes
 Type: Package
 Title: Bayesian inference for multivariate Phylogenetic Comparative Models
-Version: 0.1.1
-Author: c(person("Venelin", "Mitov", email = "vmitov@gmail.com",
-                    comment = '<a href="https://venelin.github.io">venelin.github.io</a>',
-                    role = c("aut", "cre", "cph")))
+Version: 0.1.2
+Authors@R: c(person("Venelin", "Mitov", email = "vmitov@gmail.com",
+                  comment = '<a href="https://venelin.github.io">venelin.github.io</a>',
+                  role = c("aut", "cre", "cph")))
 Maintainer: Venelin Mitov <vmitov@gmail.com>
 Description: Phylogenetic comparative methods represent models of continuous trait 
   data associated with the tips of a phylogenetic tree. Examples of such models 

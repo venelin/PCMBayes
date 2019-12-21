@@ -2,7 +2,6 @@
 
 S3method(PriorDensity,CompositePrior)
 S3method(PriorDensity,ParameterPrior)
-export(AddPrior.MCMCState)
 export(MCMCContext)
 export(MCMCState)
 export(MCMCStateVector)

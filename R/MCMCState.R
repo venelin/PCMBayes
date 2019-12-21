@@ -295,28 +295,6 @@ posv <- function(s, ctx = NULL) {
   1L + s$K + s$K + s$K + s$R + seq_len(s$P)
 }
 
-#' @export
-AddPrior.MCMCState <- function(
-  o, member = "", enclos = "?", prior, inplace = TRUE) {
-
-  if(!is.Prior(prior)) {
-    stop(
-      "AddPrior.MCMCState:: The argument prior should inherit from S3 class Prior.")
-  }
-
-  if(inplace) {
-    eval(substitute(PCMAddToListAttribute(
-      name = "prior", value = prior, object = o, member = member,
-      enclos = enclos, spec = FALSE, fixed = TRUE, inplace = TRUE)),
-      parent.frame())
-  } else {
-    o <- PCMAddToListAttribute(
-      name = "prior", value = prior, object = o, member = member,
-      enclos = enclos, spec = FALSE, fixed = TRUE, inplace = FALSE)
-    o
-  }
-}
-
 
 # set.seed(2, kind = "Mersenne-Twister", normal.kind = "Inversion")
 # tree <- PCMTree(ape::rtree(20))
